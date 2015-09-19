@@ -1,7 +1,6 @@
-var Q = require('q');
 var _ = require('underscore');
 
-module.exports = function (facebookIntegrationProvider, integrationService) {
+module.exports = function (facebookIntegrationProvider, integrationService, Q) {
 
     return {
         api: function () {

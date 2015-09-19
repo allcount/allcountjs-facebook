@@ -16,6 +16,10 @@ module.exports = function () {
                 if (facebookSecret) {
                     self.facebookSecret = facebookSecret;
                 }
+                var facebookPermissions = obj.propertyValue('facebookPermissions');
+                if (facebookPermissions) {
+                    self.facebookPermissions = facebookPermissions;
+                }
             });
         }
     }

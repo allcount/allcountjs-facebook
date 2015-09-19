@@ -1,6 +1,4 @@
-var Q = require('q');
-
-module.exports = function (appAccessRouter, integrationService, facebookIntegrationProvider, baseUrlService) {
+module.exports = function (appAccessRouter, integrationService, facebookIntegrationProvider, baseUrlService, Q) {
     var route = {};
 
     var OAuth= require('oauth').OAuth2;
@@ -12,7 +10,10 @@ module.exports = function (appAccessRouter, integrationService, facebookIntegrat
 
     route.configure = function () {
         var params = function (req) {
-            return {redirect_uri: baseUrlService.getBaseUrl() + '/oauth/facebook/callback?integrationId=' + req.query.integrationId};
+            return {
+                redirect_uri: baseUrlService.getBaseUrl() + '/oauth/facebook/callback?integrationId=' + req.query.integrationId,
+                scope: facebookIntegrationProvider.facebookPermissions && facebookIntegrationProvider.facebookPermissions.join(',') || undefined
+            };
         };
 
         appAccessRouter.get('/oauth/facebook', function(req, res) {
